@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import "./TransactionDetails.css"
+
 
 function TransactionDetails() {
   const [transaction, setTransaction] = useState({});
