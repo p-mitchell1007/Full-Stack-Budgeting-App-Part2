@@ -5,7 +5,7 @@ function TransactionEditForm() {
 let { index } = useParams();
 
 const [transaction, setTransaction] = useState({
-name: "",
+item_name: "",
 amount: 0,
 category: "",
 date: "",
@@ -15,26 +15,49 @@ const handleTextChange = (event) => {
 setTransaction({ ...transaction, [event.target.id]: event.target.value });
 };
 
+// const handleSubmit = async (event) => {
+//     event.preventDefault();
+  
+//     try {
+//       const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/${index}`, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(transaction),
+//       });
+  
+//       if (!response.ok) {
+//         throw new Error("Failed to update transaction");
+//       }
+  
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
 const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/${index}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(transaction),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to update transaction");
-      }
-  
-    } catch (error) {
-      console.log(error);
+  event.preventDefault();
+
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/${index}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(transaction),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update transaction");
     }
-  };
+
+    console.log("Transaction updated successfully!");
+  } catch (error) {
+    console.log(error);
+    console.error("An error occurred while updating the transaction. Please try again.");
+  }
+};
 
   useEffect(() => {
     const fetchTransaction = async () => {
